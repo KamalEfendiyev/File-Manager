@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Management</title>
+    <style>
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .message {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            color: green;
+            font-weight: bold;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .file-list li {
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ username }}</h1>
+        <a href="/logout" class="button">Logout</a>
+        {% if message %}
+        <div class="message">{{ message }}</div>
+        {% endif %}
+        <h2>Upload File</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit" class="button">Upload</button>
+        </form>
+        <h2>Uploaded Files</h2>
+        <ul class="file-list">
+            {% for file in files %}
+            <li>
+                <a href="/download/{{ file }}">{{ file }}</a>
+            </li>
+            {% else %}
+            <li>No files uploaded</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
